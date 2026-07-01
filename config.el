@@ -3,6 +3,8 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15))
+
 (add-to-list 'exec-path "/home/tlaloch/.local/share/mise/installs/go/1.26.1/bin")
 
 
