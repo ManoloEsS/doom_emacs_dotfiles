@@ -49,6 +49,38 @@
   (setf (alist-get 'go-mode apheleia-mode-alist) 'goimports)
   (setf (alist-get 'go-ts-mode apheleia-mode-alist) 'goimports))
 
+(setq projectile-project-search-path '("~/workspace/github.com/ManoloEsS/"))
+
+(defun +devjournal-target ()
+  (let* ((file (expand-file-name "dev-journal.org" org-directory))
+         (topic (read-string "Topic: "))
+         found)
+    (set-buffer (find-file-noselect file))
+    (widen)
+    (org-mode)
+    (org-datetree-find-date-create (calendar-current-date))
+    (let ((day-end (save-excursion (outline-end-of-subtree) (point))))
+      (save-excursion
+        (while (re-search-forward (concat "^*+ " (regexp-quote topic) "[ \t]*$") day-end t)
+          (save-excursion
+            (goto-char (match-beginning 0))
+            (when (= (org-reduced-level (org-current-level)) 4)
+              (setq found (match-beginning 0))))))
+      (if found
+          (goto-char found)
+        (goto-char day-end)
+        (unless (bolp) (insert "\n"))
+        (insert "**** " topic "\n"))
+      (org-end-of-subtree t)
+      (unless (bolp) (insert "\n")))))
+
+(after! org
+  (add-to-list 'org-capture-templates
+               '("d" "Dev journal entry" plain
+                 (function +devjournal-target)
+                 "***** %U %?\n%i"
+                 :empty-lines 1)))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
