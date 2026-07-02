@@ -3,7 +3,10 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 17))
+(setq doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15))
+
+
 
 (add-to-list 'exec-path "/home/tlaloch/.local/share/mise/installs/go/1.26.1/bin")
 
@@ -83,6 +86,11 @@
                  "***** %U %?\n%i"
                  :empty-lines 1)))
 
+(use-package! evil-fringe-mark
+  :after evil
+  :config
+  (setq evil-fringe-mark-side 'right-fringe)
+  (global-evil-fringe-mark-mode 1))
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
