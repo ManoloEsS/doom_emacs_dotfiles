@@ -50,9 +50,16 @@
 (setq org-element-use-cache nil)
 (setq org-directory "/mnt/n9/org")
 
+;; Use goimports (format + organize imports) in Go, bypassing Doom's LSP format override
+(add-hook 'go-mode-hook (lambda () (setq-local +format-with 'goimports)))
+(add-hook 'go-ts-mode-hook (lambda () (setq-local +format-with 'goimports)))
+
+;; Use ruff for Python formatting
 (after! apheleia
-  (setf (alist-get 'go-mode apheleia-mode-alist) 'goimports)
-  (setf (alist-get 'go-ts-mode apheleia-mode-alist) 'goimports))
+  (setf (alist-get 'python-mode apheleia-mode-alist) 'ruff)
+  (setf (alist-get 'python-ts-mode apheleia-mode-alist) 'ruff))
+
+
 
 (setq projectile-project-search-path '("~/workspace/github.com/ManoloEsS/"))
 
