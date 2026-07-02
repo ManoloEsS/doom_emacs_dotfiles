@@ -8,7 +8,7 @@
 
 
 
-(add-to-list 'exec-path "/home/tlaloch/.local/share/mise/installs/go/1.26.1/bin")
+(add-to-list 'exec-path "~/.local/share/mise/installs/go/1.26.1/bin")
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -48,7 +48,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-element-use-cache nil)
-(setq org-directory "/mnt/n9/org")
+(setq org-directory "~/org")
 
 ;; Use goimports (format + organize imports) in Go, bypassing Doom's LSP format override
 (add-hook 'go-mode-hook (lambda () (setq-local +format-with 'goimports)))
