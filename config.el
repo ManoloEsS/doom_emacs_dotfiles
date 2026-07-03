@@ -98,6 +98,11 @@
   :config
   (setq evil-fringe-mark-side 'right-fringe)
   (global-evil-fringe-mark-mode 1))
+(after! vterm
+  ;; ESC passes through to zsh (vi-mode normal) instead of Evil
+  (evil-collection-define-key 'insert 'vterm-mode-map (kbd "<escape>") 'vterm--self-insert)
+  (evil-collection-define-key 'normal 'vterm-mode-map (kbd "<escape>") 'vterm--self-insert))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `with-eval-after-load' block, otherwise Doom's defaults may override your
 ;; settings. E.g.
